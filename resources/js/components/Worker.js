@@ -1,7 +1,8 @@
 import React from 'react';
+import Notice from './Notice';
+import Axios from 'axios';
 
-import Main from './windows/Main';
-import Axios from "axios";
+import Main from './Main';
 
 class Worker extends React.Component {
     constructor(props) {
@@ -11,8 +12,10 @@ class Worker extends React.Component {
             loading: true,
             list: []
         };
+
         this.getList = this.getList.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.upload = this.upload.bind(this);
     }
 
     componentDidMount() {
@@ -21,14 +24,15 @@ class Worker extends React.Component {
 
     handleDelete(e) {
         e.preventDefault();
+        this.notice.notify('Try to deleting...', 'info');
         const id = e.target.value;
         Axios.delete(`/api/delete/${id}`)
             .then( response => {
-                console.log(response);
+                this.notice.notify('Video is deleted', 'success');
                 this.getList();
             })
             .catch(error => {
-                console.log(error.response);
+                this.notice.notify('Error. Maybe video does not exist', 'error');
             });
     }
 
@@ -39,33 +43,35 @@ class Worker extends React.Component {
                     loading: false,
                     list: response.data
                 });
-
-                console.log(response.data);
             })
             .catch(error => {
                 this.setState({
                     loaded: false,
                 });
-                console.log(error.response);
             })
     }
 
     upload(data) {
+        this.notice.notify('Try to uploading...', 'info');
         Axios.post('/api/upload', data)
             .then(response => {
-                console.log(response);
+                this.notice.notify('Video is uploaded!', 'success');
+                this.getList();
             })
             .catch(error => {
-                console.log(error.response);
+                this.notice.notify('Oooops', 'error');
             });
     }
 
     render() {
         return(
-            <Main loading={this.state.loading}
-                  list={this.state.list}
-                  delete={this.handleDelete}
-                  upload={this.upload}/>
+            <React.Fragment>
+                <Notice onRef={ref => (this.notice = ref)}/>
+                <Main loading={this.state.loading}
+                      list={this.state.list}
+                      delete={this.handleDelete}
+                      upload={this.upload}/>
+            </React.Fragment>
         )
     }
 }

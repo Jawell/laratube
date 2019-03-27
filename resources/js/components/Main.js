@@ -41,6 +41,9 @@ class Main extends React.Component {
         data.append('tags', this.references.tags.value);
         data.append('video', this.references.video.files[0]);
 
+        this.setState({
+            modal: false
+        });
         this.props.upload(data);
     }
 
