@@ -1,14 +1,47 @@
+img.table-preview {
+  width: 258px;
+  height: auto;
+}
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+button.upload {
+  position: fixed;
+  z-index: 1;
+  bottom: 35px;
+  right: 35px;
+  background: darkblue;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  font-size: 36px;
+}
 
-// Variables
-@import 'variables';
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+  .form-group {
+    width: 290px;
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    label {
+      display: inline-block;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  button {
+    background: darkblue;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    width: 60px;
+    color: #fff;
+  }
 }
