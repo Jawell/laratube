@@ -24,7 +24,7 @@ class Studio extends Controller
         $id = $channel->items[0]->contentDetails->relatedPlaylists->uploads;
         $config = [
             'playlistId' => $id,
-            'fields' => 'items(snippet(resourceId/videoId,title))'
+            'fields' => 'items(snippet(resourceId/videoId,thumbnails/high/url,title))'
         ];
         try {
             return $youtube->playlistItems->listPlaylistItems('snippet', $config);
@@ -38,6 +38,7 @@ class Studio extends Controller
         $videos = [];
         foreach ($rawList as $key => $value) {
             $videos[$key]['title'] = $value['snippet']['title'];
+            $videos[$key]['thumbnail'] = $value['snippet']['thumbnails']['high']->url;
             $videos[$key]['id'] = $value['snippet']['resourceId']->videoId;
         }
 
@@ -57,5 +58,9 @@ class Studio extends Controller
             ->latest('created_at')
             ->first();
         return $latest ? (is_array($latest) ? $latest['access_token'] : $latest->access_token) : null;
+    }
+
+    static public function tagsToArray($tags) {
+        return explode(',', $tags);
     }
 }
