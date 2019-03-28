@@ -16,6 +16,7 @@ class Worker extends React.Component {
         this.getList = this.getList.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.upload = this.upload.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
@@ -28,7 +29,7 @@ class Worker extends React.Component {
         const id = e.target.value;
         Axios.delete(`/api/delete/${id}`)
             .then( response => {
-                this.notice.notify('Video is deleted', 'success');
+                this.notice.notify('Video is deleted! Wait for youtube service', 'success');
                 this.getList();
             })
             .catch(error => {
@@ -55,7 +56,19 @@ class Worker extends React.Component {
         this.notice.notify('Try to uploading...', 'info');
         Axios.post('/api/upload', data)
             .then(response => {
-                this.notice.notify('Video is uploaded!', 'success');
+                this.notice.notify('Video is uploaded!  Wait for youtube service', 'success');
+                this.getList();
+            })
+            .catch(error => {
+                this.notice.notify('Oooops', 'error');
+            });
+    }
+
+    edit(data) {
+        this.notice.notify('Try to edit...', 'info');
+        Axios.patch('/api/edit', data)
+            .then(response => {
+                this.notice.notify('Title changed!! Wait for youtube service', 'success');
                 this.getList();
             })
             .catch(error => {
@@ -70,7 +83,8 @@ class Worker extends React.Component {
                 <Notice onRef={ref => (this.notice = ref)}/>
                 <Main list={this.state.list}
                       delete={this.handleDelete}
-                      upload={this.upload}/>
+                      upload={this.upload}
+                      edit={this.edit}/>
             </React.Fragment>
         )
     }

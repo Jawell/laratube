@@ -42,14 +42,23 @@ class Studio extends Controller
 
     function upload(Request $request)
     {
-        $video = Youtube::upload($request->file('video')->getPathName(), [
+        Youtube::upload($request->file('video')->getPathName(), [
             'title'       => $request->input('title'),
             'description' => $request->input('descr'),
             'tags'	      => Helper::tagsToArray($request->input('tags')),
             'category_id' => 10
         ]);
 
-        return $video->getVideoId();
+        return response()->json('', 204);
+    }
+
+    function edit(Request $request) {
+        Youtube::update($request->input('id'), [
+            'title' => $request->input('title'),
+            'category_id' => $request->input('category')
+        ]);
+
+        return response()->json('', 204);
     }
 
     function delete($id)
