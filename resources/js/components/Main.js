@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 
-import "react-table/react-table.css";
-import Table from "react-table";
+import Videos from './VideoGrid';
 
 class Main extends React.Component {
     constructor(props) {
@@ -49,54 +48,13 @@ class Main extends React.Component {
 
     render() {
         return (
-            <div>
-                <button onClick={this.handleOpenModal} className='upload'>+</button>
-                <Table data={this.props.list}
-                       defaultPageSize={10}
-                       loading={this.props.loading}
-                       className="-highlight react-table"
-                       columns={[
-                           {
-                               Header: "Data",
-                               columns: [
-                                   {
-                                       Header: "Preview",
-                                       accessor: "thumbnail",
-                                       sortable: false,
-                                       Cell: props => {
-                                           return (
-                                               <img className='table-preview' src={props.value}/>
-                                           )
-
-                                       }
-                                   },
-                                   {
-                                       Header: "Title",
-                                       accessor: "title",
-                                       width: 400
-                                   },
-                               ]
-                           },
-                           {
-                               Header: "Actions",
-                               columns: [
-                                   {
-                                       accessor: "id",
-                                       sortable: false,
-                                       Cell: props => {
-                                           return (
-                                               <React.Fragment>
-                                                   <button onClick={this.props.delete} value={props.value}>Delete
-                                                   </button>
-                                                   <button>Modify</button>
-                                               </React.Fragment>
-                                           )
-                                       }
-                                   },
-                               ]
-                           },
-                       ]}
-                />
+            <React.Fragment>
+                <div>
+                    <button onClick={this.handleOpenModal} className='upload'>+</button>
+                    <Videos videos={this.props.list}
+                            delete={this.props.delete}
+                            upload={this.props.upload}/>
+                </div>
                 <ReactModal
                     isOpen={this.state.modal}
                     className='react-modal'
@@ -120,7 +78,7 @@ class Main extends React.Component {
                         <button type='submit'>Upload</button>
                     </form>
                 </ReactModal>
-            </div>
+            </React.Fragment>
 
         );
     }

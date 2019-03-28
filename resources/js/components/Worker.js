@@ -65,10 +65,10 @@ class Worker extends React.Component {
 
     render() {
         return(
+            this.state.loading ? <p>Loading</p> :
             <React.Fragment>
                 <Notice onRef={ref => (this.notice = ref)}/>
-                <Main loading={this.state.loading}
-                      list={this.state.list}
+                <Main list={this.state.list}
                       delete={this.handleDelete}
                       upload={this.upload}/>
             </React.Fragment>
