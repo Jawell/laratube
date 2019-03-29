@@ -17,8 +17,7 @@ Route::group([
     Route::get('/', function () {
         return view('index');
     });
-
-    Route::get('/{any}', function ($any) {
-        return view('index');
-    })->where('any', '.*');
 });
+Route::get('/{any}', function ($any) {
+    return view('index');
+})->where('any', '.*');
