@@ -160,6 +160,16 @@ button.upload {
   margin-left: 1rem;
 }
 
+a.auth {
+  background: darkblue;
+  color: #fff;
+  border-radius: 0.25rem;
+  font-size: 15px;
+  margin-right: 1rem;
+  padding: 6px 1px;
+  text-decoration: none;
+}
+
 .upload-form {
   display: flex;
   flex-direction: column;
@@ -216,4 +226,9 @@ button.upload {
   button:first-child {
     margin-right: 5px;
   }
+}
+
+div.button-group-between {
+  display: flex;
+  justify-content: space-between;
 }
