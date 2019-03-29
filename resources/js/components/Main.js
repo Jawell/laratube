@@ -93,7 +93,7 @@ class Main extends React.Component {
                 <div>
                     <div className='button-group-between'>
                         <button onClick={this.handleUploadModalOpen} className='upload'>+</button>
-                        <a href='/youtube/auth' className='auth'>Авторизоваться</a>
+                        <a href='/youtube/auth' className='auth'>Authorization</a>
                     </div>
                     <Videos videos={this.props.list}
                             delete={this.props.delete}
