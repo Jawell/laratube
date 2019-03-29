@@ -2,6 +2,8 @@ import React from 'react';
 import ReactModal from 'react-modal';
 
 import Videos from './VideoGrid';
+import Categories from './Helpers/Categories';
+import Privacy from './Helpers/Privacy';
 
 class Main extends React.Component {
     constructor(props) {
@@ -59,6 +61,8 @@ class Main extends React.Component {
         data.append('title', this.references.title.value);
         data.append('descr', this.references.descr.value);
         data.append('tags', this.references.tags.value);
+        data.append('category', this.references.categoryUpload.value);
+        data.append('privacy', this.references.privacyUpload.value);
         data.append('video', this.references.video.files[0]);
 
         this.setState({
@@ -73,7 +77,8 @@ class Main extends React.Component {
         const data = {
             id: this.state.videoId,
             title: this.references.edit.value,
-            category: this.references.category.value
+            category: this.references.categoryEdit.value,
+            privacy: this.references.privacyEdit.value
         };
 
         this.setState({
@@ -112,6 +117,20 @@ class Main extends React.Component {
                             <label>Tags<input ref={input => this.references.tags = input} type='text' name='tags' autoComplete='off'/></label>
                         </div>
                         <div className='form-group'>
+                            <label>Category
+                                <select ref={input => this.references.categoryUpload = input}>
+                                    <Categories/>
+                                </select>
+                            </label>
+                        </div>
+                        <div className='form-group'>
+                            <label>Privacy
+                                <select ref={input => this.references.privacyUpload = input}>
+                                    <Privacy/>
+                                </select>
+                            </label>
+                        </div>
+                        <div className='form-group'>
                             <label>Video<input ref={input => this.references.video = input} type='file' name='video'/></label>
                         </div>
                         <button type='submit'>Upload</button>
@@ -128,24 +147,19 @@ class Main extends React.Component {
                         <div className='form-group'>
                             <label>Title<input ref={input => this.references.edit = input} type='text' name='edit' autoComplete='off'/></label>
                         </div>
-                        <div>
-                            <select ref={input => this.references.category = input}>
-                                <option value="2">Cars & Vehicles</option>
-                                <option value="23">Comedy</option>
-                                <option value="27">Education</option>
-                                <option value="24">Entertainment</option>
-                                <option value="1">Film & Animation</option>
-                                <option value="20">Gaming</option>
-                                <option value="26">How-to & Style</option>
-                                <option value="10">Music</option>
-                                <option value="25">News & Politics</option>
-                                <option value="29">Non-profits & Activism</option>
-                                <option value="22">People & Blogs</option>
-                                <option value="15">Pets & Animals</option>
-                                <option value="28">Science & Technology</option>
-                                <option value="17">Sport</option>
-                                <option value="19">Travel & Events</option>
-                            </select>
+                        <div className='form-group'>
+                            <label>Category
+                                <select ref={input => this.references.categoryEdit = input}>
+                                    <Categories/>
+                                </select>
+                            </label>
+                        </div>
+                        <div className='form-group'>
+                            <label>Privacy
+                                <select ref={input => this.references.privacyEdit = input}>
+                                    <Privacy/>
+                                </select>
+                            </label>
                         </div>
                         <button type='submit'>Edit</button>
                     </form>

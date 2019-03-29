@@ -46,8 +46,8 @@ class Studio extends Controller
             'title'       => $request->input('title'),
             'description' => $request->input('descr'),
             'tags'	      => Helper::tagsToArray($request->input('tags')),
-            'category_id' => 10
-        ]);
+            'category_id' => $request->input('category')
+        ], $request->input('privacy'));
 
         return response()->json('', 204);
     }
@@ -56,7 +56,7 @@ class Studio extends Controller
         Youtube::update($request->input('id'), [
             'title' => $request->input('title'),
             'category_id' => $request->input('category')
-        ]);
+        ], $request->input('privacy'));
 
         return response()->json('', 204);
     }

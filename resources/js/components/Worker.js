@@ -1,5 +1,5 @@
 import React from 'react';
-import Notice from './Notice';
+import Notice from './Helpers/Notice';
 import Axios from 'axios';
 
 import Main from './Main';
