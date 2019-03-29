@@ -20,8 +20,9 @@ body {
   font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
+  padding: 0;
+  margin: 0;
   letter-spacing: 0;
-  padding: 1rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -231,4 +232,24 @@ a.auth {
 div.button-group-between {
   display: flex;
   justify-content: space-between;
+}
+
+#root {
+  div.error {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+
+    span {
+      border-right: 2px solid;
+      padding-right: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  div#app{
+    padding: 1rem;
+  }
 }

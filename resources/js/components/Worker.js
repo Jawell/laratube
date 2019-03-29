@@ -88,7 +88,7 @@ class Worker extends React.Component {
     render() {
         return(
             this.state.loading ? <p>Loading</p> :
-            <React.Fragment>
+            <div id='app'>
                 <Notice onRef={ref => (this.notice = ref)}/>
                 <Main list={this.state.list}
                       delete={this.handleDelete}
@@ -97,7 +97,7 @@ class Worker extends React.Component {
                       nextPageToken={this.state.nextPage}
                       prevPageToken={this.state.prevPage}
                       getList={this.getList}/>
-            </React.Fragment>
+            </div>
         )
     }
 }
