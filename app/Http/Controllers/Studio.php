@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Google_Service_YouTube;
 use Google_Client;
 use Dawson\Youtube\Facades\Youtube;
+use App\Http\Middleware\YoutubeAuth;
 use App\Http\Controllers\Helpers\Studio as Helper;
 
 class Studio extends Controller
