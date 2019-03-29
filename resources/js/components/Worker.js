@@ -10,7 +10,9 @@ class Worker extends React.Component {
 
         this.state = {
             loading: true,
-            list: []
+            list: [],
+            nextPage: '',
+            prevPage: '',
         };
 
         this.getList = this.getList.bind(this);
@@ -37,12 +39,19 @@ class Worker extends React.Component {
             });
     }
 
-    getList() {
-        Axios.get('/api/videos')
+    getList(page = '') {
+        Axios.get(`/api/videos/${page == null ? '' : page}`)
             .then(response => {
+                const nextPage = response.data.nextPage;
+                const prevPage = response.data.prevPage;
+                delete response.data.nextPage;
+                delete response.data.prevPage;
+
                 this.setState({
                     loading: false,
-                    list: response.data
+                    list: [response.data],
+                    nextPage: nextPage,
+                    prevPage: prevPage
                 });
             })
             .catch(error => {
@@ -84,7 +93,10 @@ class Worker extends React.Component {
                 <Main list={this.state.list}
                       delete={this.handleDelete}
                       upload={this.upload}
-                      edit={this.edit}/>
+                      edit={this.edit}
+                      nextPageToken={this.state.nextPage}
+                      prevPageToken={this.state.prevPage}
+                      getList={this.getList}/>
             </React.Fragment>
         )
     }

@@ -35,9 +35,9 @@ class Studio extends Controller
         $this->youtube = new Google_Service_YouTube($this->client);
     }
 
-    function list()
+    function list($pageToken = '')
     {
-        return Helper::getVideos($this->youtube);
+        return Helper::getVideos($this->youtube, $pageToken);
     }
 
     function upload(Request $request)

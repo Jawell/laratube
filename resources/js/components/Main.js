@@ -150,8 +150,11 @@ class Main extends React.Component {
                         <button type='submit'>Edit</button>
                     </form>
                 </ReactModal>
+                <div className='pagination'>
+                    <button disabled={this.props.prevPageToken ? '' : 'disabled'} onClick={this.props.getList.bind(this, this.props.prevPageToken)}>&#60;</button>
+                    <button disabled={this.props.nextPageToken ? '' : 'disabled'} onClick={this.props.getList.bind(this, this.props.nextPageToken)}>&#62;</button>
+                </div>
             </React.Fragment>
-
         );
     }
 }

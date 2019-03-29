@@ -19,12 +19,14 @@ class Studio extends Controller
         }
     }
 
-    static function getVideosUri($channel, $youtube)
+    static function getVideosUri($channel, $youtube, $page)
     {
         $id = $channel->items[0]->contentDetails->relatedPlaylists->uploads;
         $config = [
             'playlistId' => $id,
-            'fields' => 'items(snippet(resourceId/videoId,thumbnails/high/url,title))'
+            'fields' => 'items(snippet(resourceId/videoId,thumbnails/high/url,title)),nextPageToken,prevPageToken',
+            'maxResults' => 9,
+            'pageToken' => $page
         ];
         try {
             return $youtube->playlistItems->listPlaylistItems('snippet', $config);
@@ -41,14 +43,16 @@ class Studio extends Controller
             $videos[$key]['thumbnail'] = $value['snippet']['thumbnails']['high']->url;
             $videos[$key]['id'] = $value['snippet']['resourceId']->videoId;
         }
+        $videos['nextPage'] = $rawList['nextPageToken'];
+        $videos['prevPage'] = $rawList['prevPageToken'];
 
         return $videos;
     }
 
-    static function getVideos($youtube)
+    static function getVideos($youtube, $page)
     {
         $channel = self::getChannel($youtube);
-        $rawList = self::getVideosUri($channel, $youtube);
+        $rawList = self::getVideosUri($channel, $youtube, $page);
         return self::videosList($rawList);
     }
 

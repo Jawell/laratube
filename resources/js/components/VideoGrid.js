@@ -24,28 +24,30 @@ class VideoGrid extends React.Component {
     }
 
     render() {
-        const list = this.props.videos;
-        const listItems = list.map((item) =>
-            <li key={item.id} className="cards__item">
-                <div className="card">
-                    <img className="card__image card__image--fence" src={item.thumbnail}/>
-                    <div className="card__content">
-                        <p className='card__text'
-                           onMouseEnter={this.handleMouseEnter}
-                           onMouseLeave={this.handleMouseLeave}>
+        const list = this.props.videos[0];
+        const listItems = [];
+        for(const [key, val] of Object.entries(list)) {
+            listItems.push(
+                <li key={val.id} className="cards__item">
+                    <div className="card">
+                        <img className="card__image card__image--fence" src={val.thumbnail}/>
+                        <div className="card__content">
+                            <p className='card__text'
+                               onMouseEnter={this.handleMouseEnter}
+                               onMouseLeave={this.handleMouseLeave}>
                                 <button onMouseLeave={this.handleMouseLeave}
                                         className='edit-invisible'
-                                        value={item.id}
+                                        value={val.id}
                                         onClick={this.props.editModalOpen}>Edit</button>
-                            {item.title}</p>
-                        <button value={item.id}
-                                onClick={this.props.delete}
-                                className="btn btn--block card__btn">Delete</button>
+                                {val.title}</p>
+                            <button value={val.id}
+                                    onClick={this.props.delete}
+                                    className="btn btn--block card__btn">Delete</button>
+                        </div>
                     </div>
-                    {listItems}
-                </div>
-            </li>
-        );
+                </li>
+            )
+        }
 
         return (
             <ul className="cards">

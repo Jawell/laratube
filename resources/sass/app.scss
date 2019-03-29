@@ -196,3 +196,20 @@ button.upload {
 .edit-invisible {
   display: none;
 }
+
+.pagination {
+  text-align: center;
+
+  button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    border-radius: 0.25rem;
+    background: none;
+  }
+
+  button:first-child {
+    margin-right: 5px;
+  }
+}

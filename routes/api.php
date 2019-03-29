@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/videos', 'Studio@list');
+Route::get('/videos/{pageToken}', 'Studio@list');
 Route::post('/upload', 'Studio@upload');
 Route::delete('/delete/{id}', 'Studio@delete');
 Route::patch('/edit', 'Studio@edit');
