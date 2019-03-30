@@ -12,7 +12,7 @@ Dont forget about **LimitRequestBody** for virtual host configuration for increa
 ## PHP
 Change **upload_max_filesize** for upload large files
 
-##.env
+## .env
 Fill ID and Secret of YouTube API in .env file  
 ```GOOGLE_CLIENT_ID=ID```  
 ```GOOGLE_CLIENT_SECRET=SECRET```
